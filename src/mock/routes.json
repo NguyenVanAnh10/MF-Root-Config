@@ -1,0 +1,24 @@
+{
+  "routes": [
+    {
+      "type": "route",
+      "default": true,
+      "routes": [{ "type": "application", "name": "@euroland/mf1" }]
+    },
+    {
+      "type": "route",
+      "path": "settings",
+      "routes": [{ "type": "application", "name": "@euroland/mf1" }]
+    },
+    {
+      "type": "route",
+      "path": "mf1",
+      "routes": [{ "type": "application", "name": "@euroland/mf1" }]
+    },
+    {
+      "type": "route",
+      "path": "mf2",
+      "routes": [{ "type": "application", "name": "@euroland/mf2" }]
+    }
+  ]
+}

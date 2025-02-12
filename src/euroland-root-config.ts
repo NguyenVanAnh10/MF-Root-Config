@@ -5,20 +5,33 @@ import {
   constructLayoutEngine,
 } from "single-spa-layout";
 import microfrontendLayout from "./microfrontend-layout.html";
+import { fetchRoutes } from "./mock/api";
 
-const routes = constructRoutes(microfrontendLayout);
-const applications = constructApplications({
-  routes,
-  loadApp({ name }) {
-    return import(/* webpackIgnore: true */ name);
-  },
-});
-const layoutEngine = constructLayoutEngine({ routes, applications });
+// Fetch routes from the mock API
+fetchRoutes()
+  .then((response: any) => {
+    const routes = constructRoutes(response.data); // Use the fetched routes
+    console.log(routes);
 
-applications.forEach(registerApplication);
+    const applications = constructApplications({
+      routes,
+      loadApp({ name }) {
+        return import(/* webpackIgnore: true */ name);
+      },
+    });
 
-import(/* webpackIgnore: true */ "@euroland/shadcn-ui-styleguide").then(() => {
-  // Activate the layout engine once the styleguide CSS is loaded
-  layoutEngine.activate();
-  start();
-});
+    const layoutEngine = constructLayoutEngine({ routes, applications });
+
+    applications.forEach(registerApplication);
+
+    import(/* webpackIgnore: true */ "@euroland/shadcn-ui-styleguide").then(
+      () => {
+        // Activate the layout engine once the styleguide CSS is loaded
+        layoutEngine.activate();
+        start();
+      }
+    );
+  })
+  .catch((error) => {
+    console.error("Error fetching routes:", error);
+  });
