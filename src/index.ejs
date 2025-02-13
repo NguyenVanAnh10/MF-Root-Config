@@ -24,8 +24,8 @@
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@6.0.3/lib/es2015/esm/single-spa.min.js" as="module">
 
   <!-- Add your organization's prod import map URL to this script's src  -->
-  <!-- <script type="injector-importmap" src="/importmap.json"></script> -->
-  <script type="injector-importmap" src="https://react.microfrontends.app/importmap.json"></script>
+  <script type="injector-importmap" src="http://localhost:9000/importmap.json"></script>
+  <!-- <script type="injector-importmap" src="https://react.microfrontends.app/importmap.json"></script> -->
   <% if (isLocal) { %>
     <script type="injector-importmap">
     {
@@ -33,8 +33,7 @@
         "@euroland/root-config": "//localhost:9000/euroland-root-config.js",
         "@single-spa/welcome": "https://cdn.jsdelivr.net/npm/single-spa-welcome/dist/single-spa-welcome.min.js",
         "@euroland/mf1": "//localhost:8500/euroland-mf1.js",
-        "@euroland/mf2": "//localhost:8600/euroland-Micro-FE-SingSPA2.js",
-        "@euroland/shadcn-ui-styleguide": "//localhost:8400/euroland-shadcn-ui-styleguide.js"
+        "@euroland/mf2": "//localhost:8600/euroland-Micro-FE-SingSPA2.js"
       }
     }
   </script>
@@ -51,10 +50,24 @@
     You need to enable JavaScript to run this app.
   </noscript>
   <main></main>
+  <!-- <script>
+    // URL of the import map
+    const importMapUrl = 'http://localhost:9000/importmap.json';
+
+    // Inject the import map from the URL
+    importMapInjector.importMap(importMapUrl)
+      .then(() => {
+        console.log('Import map injected successfully!');
+        // You can now use the modules defined in the import map
+      })
+      .catch((error) => {
+        console.error('Error injecting import map:', error);
+      });
+  </script> -->
   <script>
     window.importMapInjector.initPromise.then(() => {
       import('@euroland/root-config');
-      import('@euroland/shadcn-ui-styleguide');
+      // import('@euroland/shadcn-ui-styleguide');
     });
   </script>
   <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>

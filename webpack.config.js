@@ -1,6 +1,7 @@
 const { merge } = require("webpack-merge");
 const singleSpaDefaults = require("webpack-config-single-spa-ts");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 module.exports = (webpackConfigEnv, argv) => {
   const orgName = "euroland";
@@ -24,5 +25,17 @@ module.exports = (webpackConfigEnv, argv) => {
         },
       }),
     ],
+    devServer: {
+      setupMiddlewares: (middlewares, devServer) => {
+        if (!devServer) {
+          throw new Error("webpack-dev-server is not defined");
+        }
+        devServer.app.get("/importmap.json", (_, response) => {
+          response.setHeader("Content-Type", "application/importmap+json");
+          response.sendFile(path.join(__dirname, "/importmap.local.json"));
+        });
+        return middlewares;
+      },
+    },
   });
 };

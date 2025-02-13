@@ -24,13 +24,13 @@ fetchRoutes()
 
     applications.forEach(registerApplication);
 
-    import(/* webpackIgnore: true */ "@euroland/shadcn-ui-styleguide").then(
-      () => {
-        // Activate the layout engine once the styleguide CSS is loaded
-        layoutEngine.activate();
-        start();
-      }
-    );
+    // import(/* webpackIgnore: true */ "@euroland/shadcn-ui-styleguide").then(
+    //   () => {
+    // Activate the layout engine once the styleguide CSS is loaded
+    layoutEngine.activate();
+    start();
+    //   }
+    // );
   })
   .catch((error) => {
     console.error("Error fetching routes:", error);
