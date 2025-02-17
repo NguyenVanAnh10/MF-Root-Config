@@ -24,13 +24,13 @@
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@6.0.3/lib/es2015/esm/single-spa.min.js" as="module">
 
   <!-- Add your organization's prod import map URL to this script's src  -->
-  <script type="injector-importmap" src="http://localhost:9000/importmap.json"></script>
+  <script type="injector-importmap" src="http://localhost:9009/importmap.json"></script>
   <!-- <script type="injector-importmap" src="https://react.microfrontends.app/importmap.json"></script> -->
   <% if (isLocal) { %>
     <script type="injector-importmap">
     {
       "imports": {
-        "@euroland/root-config": "//localhost:9000/euroland-root-config.js",
+        "@euroland/root-config": "//localhost:9009/euroland-root-config.js",
         "@single-spa/welcome": "https://cdn.jsdelivr.net/npm/single-spa-welcome/dist/single-spa-welcome.min.js",
         "@euroland/mf1": "//localhost:8500/euroland-mf1.js",
         "@euroland/mf2": "//localhost:8600/euroland-Micro-FE-SingSPA2.js",
